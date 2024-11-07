@@ -57,7 +57,8 @@ body {
     position: fixed;
     width: 30px;
     height: 30px;
-    background: url('https://highseas.hackclub.com/seagull.svg') no-repeat;
+    background: url('') no-repeat;
+    /* i forgot to make a seagull image */
     background-size: contain;
     animation: fly 15s linear infinite;
 }
