@@ -3,6 +3,10 @@ let autoClickers = 0;
 let multiplier = 1;
 let ships = 0;
 let cannonballs = 0;
+let parrotCount = 0;
+let compassCount = 0;
+let krakenCount = 0;
+let blahajCount = 0;
 let dps = 0;
 
 const doubloon = document.getElementById('doubloon');
@@ -124,6 +128,53 @@ function buyCannonball() {
         cannonballs++;
         updateStats();
         createSparkles();
+    }
+}
+
+function buyParrot() {
+    if (doubloons >= 2000) {
+        doubloons -= 2000;
+        parrotCount++;
+        dps += 15;
+        updateDisplay();
+        updateStats();
+        updateUpgradeCounts();
+    }
+}
+
+function buyCompass() {
+    if (doubloons >= 5000) {
+        doubloons -= 5000;
+        compassCount++;
+        clickPower += 25;
+        dps += 30;
+        updateDisplay();
+        updateStats();
+        updateUpgradeCounts();
+    }
+}
+
+function buyKraken() {
+    if (doubloons >= 10000) {
+        doubloons -= 10000;
+        krakenCount++;
+        dps += 75;
+        clickPower += 50;
+        updateDisplay();
+        updateStats();
+        updateUpgradeCounts();
+    }
+}
+
+function buyBlahaj() {
+    if (doubloons >= 25000) {
+        doubloons -= 25000;
+        blahajCountCount++;
+        dps += 150;
+        clickPower += 100;
+        updateDisplay();
+        updateStats();
+        updateUpgradeCounts();
     }
 }
 
