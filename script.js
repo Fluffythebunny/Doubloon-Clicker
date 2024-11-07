@@ -209,7 +209,7 @@ setInterval(() => {
     }
 }, 1000);
 
-// didnt have an image for seagulls
+
 document.querySelectorAll('.seagull').forEach(seagull => {
     seagull.style.top = `${Math.random() * 50}vh`;
     seagull.style.animationDelay = `${Math.random() * 5}s`;
