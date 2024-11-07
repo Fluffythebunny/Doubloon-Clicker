@@ -139,6 +139,7 @@ function buyParrot() {
         updateDisplay();
         updateStats();
         updateUpgradeCounts();
+        createSparkles();
     }
 }
 
@@ -151,6 +152,7 @@ function buyCompass() {
         updateDisplay();
         updateStats();
         updateUpgradeCounts();
+        createSparkles();
     }
 }
 
@@ -163,6 +165,7 @@ function buyKraken() {
         updateDisplay();
         updateStats();
         updateUpgradeCounts();
+        createSparkles();
     }
 }
 
@@ -175,6 +178,7 @@ function buyBlahaj() {
         updateDisplay();
         updateStats();
         updateUpgradeCounts();
+        createSparkles();
     }
 }
 
@@ -205,7 +209,7 @@ setInterval(() => {
     }
 }, 1000);
 
-// Initialize seagulls with random positions
+// didnt have an image for seagulls
 document.querySelectorAll('.seagull').forEach(seagull => {
     seagull.style.top = `${Math.random() * 50}vh`;
     seagull.style.animationDelay = `${Math.random() * 5}s`;
