@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doubloon Clicker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="ocean-background"></div>
+    <div class="ship"></div>
+    <div class="clouds"></div>
+    
+    <header>
+        <div id="stats">
+            <div id="counter">Doubloons: 0</div>
+            <div id="dps">Per Second: 0</div>
+            <div id="click-power">Click Power: 1</div>
+        </div>
+    </header>
+
+    <img id="doubloon" src="https://highseas.hackclub.com/doubloon.svg" alt="Doubloon">
+    
+    <div id="upgrades">
+        <button class="upgrade-btn" onclick="buyAutoClicker()">
+            <span class="btn-icon">⚓</span>
+            Hire Pirate Crew (50 doubloons)
+            <span class="count"></span>
+        </button>
+        <button class="upgrade-btn" onclick="buyMultiplier()">
+            <span class="btn-icon">🗺️</span>
+            Buy Treasure Map (100 doubloons)
+            <span class="count"></span>
+        </button>
+        <button class="upgrade-btn" onclick="buyShip()">
+            <span class="btn-icon">⛵</span>
+            Purchase Ship (500 doubloons)
+            <span class="count"></span>
+        </button>
+        <button class="upgrade-btn" onclick="buyCannonball()">
+            <span class="btn-icon">💣</span>
+            Load Cannons (1000 doubloons)
+            <span class="count"></span>
+        </button>
+    </div>
+
+    <div class="decorations">
+        <div class="seagull"></div>
+        <div class="seagull"></div>
+        <div class="seagull"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
