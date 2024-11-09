@@ -31,16 +31,9 @@ body {
     margin: 0;
     overflow: hidden;
     position: relative;
-}
-
-.ocean-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('background.svg') repeat-x bottom;
-    z-index: -1;
+    background: url('background.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .ship {
@@ -251,4 +244,9 @@ footer {
 
 .state-btn {
     cursor: pointer;
+}
+
+.delete-save {
+    right: 10px;
+    position: fixed;
 }

@@ -9,6 +9,7 @@ let compassCount = 0;
 let krakenCount = 0;
 let blahajCount = 0;
 let dps = 0;
+let reset = false;
 
 const doubloon = document.getElementById('doubloon');
 const counter = document.getElementById('counter');
@@ -217,6 +218,7 @@ document.querySelectorAll('.seagull').forEach(seagull => {
 });
 
 function saveState() {
+    if (reset) return;
     const state = {
         doubloons,
         autoClickers,
@@ -268,4 +270,12 @@ function importGame() {
     if (!state) return;
     localStorage.setItem('doubloon-storage', atob(state));
     location.reload();
+}
+
+function resetGame() {
+    if (confirm('                    Are you sure you want to reset the game?\n                                  All progress will be lost.')) {
+        reset = true;
+        localStorage.removeItem('doubloon-storage');
+        location.reload();
+    }
 }
