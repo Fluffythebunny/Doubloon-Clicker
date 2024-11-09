@@ -1,5 +1,6 @@
 let doubloons = 0;
 let autoClickers = 0;
+let clickPower = 1;
 let multiplier = 1;
 let ships = 0;
 let cannonballs = 0;
@@ -139,10 +140,8 @@ function buyParrot() {
         doubloons -= 2000;
         parrotCount++;
         dps += 15;
-        updateDisplay();
         updateStats();
         saveState();
-        updateUpgradeCounts();
         createSparkles();
     }
 }
@@ -153,10 +152,8 @@ function buyCompass() {
         compassCount++;
         clickPower += 25;
         dps += 30;
-        updateDisplay();
         updateStats();
         saveState();
-        updateUpgradeCounts();
         createSparkles();
     }
 }
@@ -167,10 +164,8 @@ function buyKraken() {
         krakenCount++;
         dps += 75;
         clickPower += 50;
-        updateDisplay();
         updateStats();
         saveState();
-        updateUpgradeCounts();
         createSparkles();
     }
 }
@@ -178,13 +173,11 @@ function buyKraken() {
 function buyBlahaj() {
     if (doubloons >= 25000) {
         doubloons -= 25000;
-        blahajCountCount++;
+        blahajCount++;
         dps += 150;
         clickPower += 100;
-        updateDisplay();
         updateStats();
         saveState();
-        updateUpgradeCounts();
         createSparkles();
     }
 }
@@ -199,7 +192,7 @@ function updateStats() {
     document.getElementById('click-power').textContent = `Click Power: ${Math.floor(multiplier.toFixed(1)).toLocaleString()}`;
     
     document.querySelectorAll('.upgrade-btn').forEach((btn, index) => {
-        const counts = [autoClickers, Math.floor(multiplier - 1), ships, cannonballs];
+        const counts = [autoClickers, Math.floor(multiplier - 1), ships, cannonballs, parrotCount, compassCount, krakenCount, blahajCount];
         const count = btn.querySelector('.count');
         if (counts[index] > 0) {
             count.textContent = counts[index];
