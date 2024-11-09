@@ -1,5 +1,6 @@
 let doubloons = 0;
 let autoClickers = 0;
+let clickPower = 1;
 let multiplier = 1;
 let ships = 0;
 let cannonballs = 0;
@@ -26,22 +27,21 @@ function createSparkles() {
 }
 
 doubloon.addEventListener('click', (event) => {
+    playGoldSound();
     addDoubloons(1 * multiplier);
     createFloatingText(event);
     createParticles(event);
-    playGoldSound();
     createSparkles();
 });
 
 function playGoldSound() {
-    const audio = new Audio('https://www.soundjay.com/misc/sounds/coins-in-hand-1.mp3');
-    audio.volume = 0.2;
-    audio.play();
+    new Audio('click.mp3').play();
 }
 
 function addDoubloons(amount) {
     doubloons += amount;
     updateStats();
+    saveState();
     doubloon.style.transform = 'scale(0.95)';
     setTimeout(() => doubloon.style.transform = 'scale(1)', 100);
 }
@@ -50,7 +50,7 @@ function createFloatingText(event) {
     const text = document.createElement('div');
     text.textContent = `+${1 * multiplier} doubloons!`;
     text.className = 'floating-text';
-    text.style.left = `${event.clientX}px`;
+    text.style.left = `${event.clientX-125}px`;
     text.style.top = `${event.clientY}px`;
     document.body.appendChild(text);
     setTimeout(() => text.remove(), 1000);
@@ -100,6 +100,7 @@ function buyAutoClicker() {
         doubloons -= 50;
         autoClickers++;
         updateStats();
+        saveState();
         createSparkles();
     }
 }
@@ -109,6 +110,7 @@ function buyMultiplier() {
         doubloons -= 100;
         multiplier *= 1.5;
         updateStats();
+        saveState();
         createSparkles();
     }
 }
@@ -118,6 +120,7 @@ function buyShip() {
         doubloons -= 500;
         ships++;
         updateStats();
+        saveState();
         createSparkles();
     }
 }
@@ -127,6 +130,7 @@ function buyCannonball() {
         doubloons -= 1000;
         cannonballs++;
         updateStats();
+        saveState();
         createSparkles();
     }
 }
@@ -136,9 +140,8 @@ function buyParrot() {
         doubloons -= 2000;
         parrotCount++;
         dps += 15;
-        updateDisplay();
         updateStats();
-        updateUpgradeCounts();
+        saveState();
         createSparkles();
     }
 }
@@ -149,9 +152,8 @@ function buyCompass() {
         compassCount++;
         clickPower += 25;
         dps += 30;
-        updateDisplay();
         updateStats();
-        updateUpgradeCounts();
+        saveState();
         createSparkles();
     }
 }
@@ -162,9 +164,8 @@ function buyKraken() {
         krakenCount++;
         dps += 75;
         clickPower += 50;
-        updateDisplay();
         updateStats();
-        updateUpgradeCounts();
+        saveState();
         createSparkles();
     }
 }
@@ -172,12 +173,11 @@ function buyKraken() {
 function buyBlahaj() {
     if (doubloons >= 25000) {
         doubloons -= 25000;
-        blahajCountCount++;
+        blahajCount++;
         dps += 150;
         clickPower += 100;
-        updateDisplay();
         updateStats();
-        updateUpgradeCounts();
+        saveState();
         createSparkles();
     }
 }
@@ -187,12 +187,12 @@ function calculateDPS() {
 }
 
 function updateStats() {
-    counter.textContent = `Doubloons: ${Math.floor(doubloons)}`;
-    document.getElementById('dps').textContent = `Per Second: ${calculateDPS()}`;
-    document.getElementById('click-power').textContent = `Click Power: ${multiplier.toFixed(1)}`;
+    counter.textContent = `Doubloons: ${Math.floor(doubloons).toLocaleString()}`;
+    document.getElementById('dps').textContent = `Per Second: ${Math.floor(calculateDPS()).toLocaleString()}`;
+    document.getElementById('click-power').textContent = `Click Power: ${Math.floor(multiplier.toFixed(1)).toLocaleString()}`;
     
     document.querySelectorAll('.upgrade-btn').forEach((btn, index) => {
-        const counts = [autoClickers, Math.floor(multiplier - 1), ships, cannonballs];
+        const counts = [autoClickers, Math.floor(multiplier - 1), ships, cannonballs, parrotCount, compassCount, krakenCount, blahajCount];
         const count = btn.querySelector('.count');
         if (counts[index] > 0) {
             count.textContent = counts[index];
@@ -207,6 +207,7 @@ setInterval(() => {
     if (autoClickers > 0 || ships > 0 || cannonballs > 0) {
         addDoubloons(calculateDPS());
     }
+    saveState();
 }, 1000);
 
 
@@ -214,3 +215,57 @@ document.querySelectorAll('.seagull').forEach(seagull => {
     seagull.style.top = `${Math.random() * 50}vh`;
     seagull.style.animationDelay = `${Math.random() * 5}s`;
 });
+
+function saveState() {
+    const state = {
+        doubloons,
+        autoClickers,
+        multiplier,
+        ships,
+        cannonballs,
+        parrotCount,
+        compassCount,
+        krakenCount,
+        blahajCount,
+        dps,
+        clickPower
+    };
+    return localStorage.setItem('doubloon-storage', JSON.stringify(state));
+}
+
+function loadState() {
+    const savedState = localStorage.getItem('doubloon-storage');
+    if (savedState) {
+        const state = JSON.parse(savedState);
+        doubloons = state.doubloons || 0;
+        autoClickers = state.autoClickers || 0;
+        multiplier = state.multiplier || 1;
+        ships = state.ships || 0;
+        cannonballs = state.cannonballs || 0;
+        parrotCount = state.parrotCount || 0;
+        compassCount = state.compassCount || 0;
+        krakenCount = state.krakenCount || 0;
+        blahajCount = state.blahajCount || 0;
+        dps = state.dps || 0;
+        clickPower = state.clickPower || 0;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadState();
+    updateStats();
+});
+
+window.addEventListener('beforeunload', saveState);
+
+function exportGame() {
+    const state = localStorage.getItem('doubloon-storage');
+    prompt('Save state:', btoa(state));
+}
+
+function importGame() {
+    const state = prompt('Paste state:');
+    if (!state) return;
+    localStorage.setItem('doubloon-storage', atob(state));
+    location.reload();
+}
