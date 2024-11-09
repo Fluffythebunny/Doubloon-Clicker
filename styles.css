@@ -15,6 +15,12 @@
     100% { filter: brightness(1) drop-shadow(0 0 10px #ffd700); }
 }
 
+@keyframes wobble {
+    0% { transform: rotate(-2.5deg); }
+    50% { transform: rotate(2.5deg); }
+    100% { transform: rotate(-2.5deg); }
+}
+
 body {
     color: #fff;
     font-family: 'Pirata One', cursive;
@@ -33,7 +39,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('https://highseas.hackclub.com/background.svg') repeat-x bottom;
+    background: url('background.svg') repeat-x bottom;
     z-index: -1;
 }
 
@@ -43,7 +49,7 @@ body {
     left: -150px;
     width: 100px;
     height: 100px;
-    background: url('https://highseas.hackclub.com/ship.svg') no-repeat;
+    background: url('ship.svg') no-repeat;
     background-size: contain;
     animation: sailShip 20s linear infinite;
 }
@@ -68,37 +74,38 @@ body {
     50% { transform: translateX(calc(50vw)) translateY(-50px); }
     100% { transform: translateX(calc(100vw + 100px)) translateY(0); }
 }
+
 #doubloon {
-    position: fixed;
-    left: 25%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     cursor: pointer;
     width: 400px;
     height: 400px;
     transition: all 0.2s ease;
-    filter: drop-shadow(0 0 0 #ffd700);
+    filter: drop-shadow(0 0 15px #ffd700);
     z-index: 5;
 }
 
-#doubloon:hover {
-    filter: drop-shadow(0 0 15px #ffd700);
+#doubloon:active {
+    transform: scale(0.9);
 }
 
-#doubloon:active {
-    transform: translate(-50%, -50%) scale(0.95);
+#doubloon-container1 {
+    position: fixed;
+    left: calc(25% - 200px);
+    top: calc(50% - 200px);
+}
+
+#doubloon-container2 {
+    animation: wobble 3.5s infinite;
 }
 
 #counter {
-    position: fixed;
-    left: 25%;
-    top: 10%;
-    transform: translateX(-50%);
-    text-align: center;
     font-size: 2em;
     color: #ffd700;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     z-index: 10;
+    position: fixed;
+    top: 10px;
+    left: 20px;
 }
 
 #dps, #click-power {
@@ -163,7 +170,7 @@ body {
       cursor: pointer;
       transition: all 0.3s;
       font-family: 'Pirata One', cursive;
-      font-size: 1.2em;
+      font-size: 1.15em;
       position: relative;
       width: 100%;
       min-height: 60px;
@@ -210,22 +217,6 @@ body {
     box-shadow: 0 0 10px #ffd700;
 }
 
-.clouds {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100px;
-    background: url('https://highseas.hackclub.com/cloud.svg') repeat-x;
-    opacity: 0.6;
-    animation: moveClouds 30s linear infinite;
-}
-
-@keyframes moveClouds {
-    from { background-position: 0 0; }
-    to { background-position: 100% 0; }
-}
-
 @keyframes sparkle {
     0%, 100% { opacity: 0; }
     50% { opacity: 1; }
@@ -238,4 +229,26 @@ body {
     background: #ffd700;
     border-radius: 50%;
     animation: sparkle 0.8s linear infinite;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to bottom, #1a3c5e, #60dcf1);
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.8em;
+}
+
+.state-btns {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.state-btn {
+    cursor: pointer;
 }

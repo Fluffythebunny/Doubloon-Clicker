@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doubloon Clicker</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+    <link rel="icon" href="doubloon.svg">
+    <link rel="stylesheet" href="font.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="ocean-background"></div>
     <div class="ship"></div>
-    <div class="clouds"></div>
     
     <header>
         <div id="stats">
@@ -20,47 +21,52 @@
         </div>
     </header>
 
-    <img id="doubloon" src="https://highseas.hackclub.com/doubloon.svg" alt="Doubloon">
+    <div id="doubloon-container1">
+        <div id="doubloon-container2">
+            <img id="doubloon" draggable="false" src="doubloon.svg" alt="Doubloon">
+        </div>
+    </div>
     
     <div id="upgrades">
         <button class="upgrade-btn" onclick="buyAutoClicker()">
             <span class="btn-icon">⚓</span>
-            Hire Pirate Crew (50 doubloons)
+            Hire Crew<br>(50 doubloons)
             <span class="count"></span>
         </button>
         <button class="upgrade-btn" onclick="buyMultiplier()">
             <span class="btn-icon">🗺️</span>
-            Buy Treasure Map (100 doubloons)
+            Treasure Map<br>(100 doubloons)
             <span class="count"></span>
         </button>
         <button class="upgrade-btn" onclick="buyShip()">
             <span class="btn-icon">⛵</span>
-            Purchase Ship (500 doubloons)
+            Ship<br>(500 doubloons)
             <span class="count"></span>
         </button>
         <button class="upgrade-btn" onclick="buyCannonball()">
             <span class="btn-icon">💣</span>
-            Load Cannons (1000 doubloons)
+            Load Cannons<br>(1,000 doubloons)
             <span class="count"></span>
         </button>
         <button class="upgrade-btn" onclick="buyParrot()">
             <span class="btn-icon">🦜</span>
-            Train Parrot Scout (2000 doubloons)
+            Train Parrot<br>(2,000 doubloons)
             <span class="count"></span>
         </button>
         <button class="upgrade-btn" onclick="buyCompass()">
             <span class="btn-icon">🧭</span>
-            Magic Compass (5000 doubloons)
+            Compass<br>(5,000 doubloons)
             <span class="count"></span>
         </button>
         <button class="upgrade-btn" onclick="buyKraken()">
             <span class="btn-icon">🐙</span>
-            Tame Kraken (10000 doubloons)
+            Tame Kraken<br>(10,000 doubloons)
             <span class="count"></span>
         </button>  
         <button class="upgrade-btn" onclick="buyBlahaj()">
             <span class="btn-icon">🦈</span>
-            BLÅHAJ Alliance (25000 doubloons)
+            BLÅHAJ Alliance<br>(25,000 doubloons)
+            <span class="count"></span>
         </button>
     </div>
 
@@ -70,5 +76,17 @@
         <div class="seagull"></div>
     </div>
     <script src="script.js"></script>
+    <footer>
+        <div class="state-btns">
+            <div class="state-btn" onclick="exportGame()">
+                <a>Export Save</a>
+                <i class="fa-solid fa-upload"></i>
+            </div>
+            <div class="state-btn" onclick="importGame()">
+                <a>Import Save</a>
+                <i class="fa-solid fa-download"></i>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
